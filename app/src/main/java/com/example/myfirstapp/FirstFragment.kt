@@ -19,7 +19,7 @@ class FirstFragment : Fragment() {
 
     private fun countMe (view: View) {
         // Get the text view
-        var showCountTextView = view.findViewById<TextView>(R.id.textview_first)
+        val showCountTextView = view.findViewById<TextView>(R.id.textview_first)
         // Get the value of the text view
         val countString = showCountTextView.text.toString()
         // Convert value to a number and increment it
@@ -49,7 +49,10 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         // Random Button
         view.findViewById<Button>(R.id.random_button).setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+            val showCountTextView = view.findViewById<TextView>(R.id.textview_first)
+            val currentCount = showCountTextView.text.toString().toInt()
+            val action = FirstFragmentDirections.actionFirstFragmentToSecondFragment(currentCount)
+            findNavController().navigate(action)
         }
         // Toast Button
         view.findViewById<Button>(R.id.toast_button).setOnClickListener {
